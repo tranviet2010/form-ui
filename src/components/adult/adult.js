@@ -74,11 +74,15 @@ function Adult() {
                             <Input />
                         </Form.Item>
 
-                        <Form.Item name="date" label="Ngày tháng năm sinh">
+                        <Form.Item name="date" label="Ngày tháng năm sinh" rules={[{ required: true}]}>
                             <DatePicker />
                         </Form.Item>
 
-                        <Form.Item label="Giới tính" name="male">
+                        <Form.Item
+                            label="Giới tính"
+                            name="male"
+                            rules={[{ required: true, message: 'Vui lòng chọn giới tính' }]}
+                        >
                             <Select>
                                 <Select.Option value="0">Nam</Select.Option>
                                 <Select.Option value="1">Nữ</Select.Option>

@@ -48,7 +48,7 @@ function ResultAdult() {
 
     useEffect(() => {
         if (dataInfoNavigate?.date) {
-            let url = `height/finByQuery?number_day=${DateToDay(dataInfoNavigate?.date)}&height=${dataInfoNavigate.height}&weight=${dataInfoNavigate.weight}`
+            let url = `height/finByQuery?number_day=${DateToDay(dataInfoNavigate?.date)}&height=${dataInfoNavigate.height}&weight=${dataInfoNavigate.weight}&male=${dataInfoNavigate.male}`
             getInfoFeNo(url).then((res) => {
                 let dataRespon = res?.data?.data
                 setData(res?.data?.data)
@@ -85,6 +85,7 @@ function ResultAdult() {
 
     }, [])
     console.log("dataInfoNavigate", dataInfoNavigate);
+    console.log("dataInfoNavigate", data);
 
     return (
         <Row

@@ -44,7 +44,7 @@ function ResultChild() {
     };
 
     useEffect(() => {
-        let url = `nose-femur/finByQuery?age=${dataInfoNavigate?.age}&averageNose=${dataInfoNavigate.averageNose}&averageFemur=${dataInfoNavigate.averageFemur}`
+        let url = `nose-femur/finByQuery?age=${dataInfoNavigate?.age}&male=${dataInfoNavigate?.male}&averageNose=${dataInfoNavigate.averageNose}&averageFemur=${dataInfoNavigate.averageFemur}`
         getInfoFeNo(url).then((res) => {
             let dataRespon = res?.data?.data
             setData(dataRespon)
