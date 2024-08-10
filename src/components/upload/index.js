@@ -16,7 +16,7 @@ const UploadFile = ({handleFile}) => {
         formData.append('file', file);
     
         try {
-          const response = await axios.post('http://localhost:198/api/v1/files/upload', formData, {
+          const response = await axios.post('http://172.104.189.80:198/api/v1/files/upload', formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
             },
@@ -58,7 +58,6 @@ const UploadFile = ({handleFile}) => {
         imgWindow?.document.write(image.outerHTML);
     };
     return (
-        <ImgCrop rotationSlider>
             <Upload
                 customRequest={customRequest}
                 listType="picture-card"
@@ -66,9 +65,8 @@ const UploadFile = ({handleFile}) => {
                 onChange={onChange}
                 onPreview={onPreview}
             >
-                {fileList.length < 1 && '+ Upload'}
+                {fileList.length < 1 && '+ Tải file lên'}
             </Upload>
-        </ImgCrop>
     );
 };
 export default UploadFile;

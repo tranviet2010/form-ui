@@ -69,7 +69,7 @@ function Adult() {
                         <Form.Item
                             label="Họ tên"
                             name="sponsor"
-                            rules={[{ required: true, message: 'Vui lòng nhập số tuần thai nhi' }]}
+                            rules={[{ required: true, message: 'Vui lòng nhập tên' }]}
                         >
                             <Input />
                         </Form.Item>

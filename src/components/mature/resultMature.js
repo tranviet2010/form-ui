@@ -93,7 +93,7 @@ function ResultMature() {
             <Col xs={24} sm={24} md={24} lg={24} xl={24} style={{ display: 'flex', justifyContent: 'center' }}>
                 <Button style={{ marginRight: "2rem" }} type="primary" onClick={handleConvert}>Tải ảnh xuống</Button>
 
-                <Button type="primary" onClick={() => { navigate('/adult') }}>Đóng</Button>
+                <Button type="primary" onClick={() => { navigate('/mature') }}>Đóng</Button>
             </Col>
         </Row>
     );

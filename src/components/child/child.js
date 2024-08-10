@@ -20,13 +20,9 @@ function Child() {
     const [percent, setPercent] = React.useState(-50);
     const [form] = Form.useForm()
     const onFinish = (value) => {
-        setLoading(true);
-        setTimeout(() => {
-            setLoading(false);
-            navigate('result', {
-                state: { data: value },
-            })
-        }, 100);
+        navigate('result', {
+            state: { data: value },
+        })
     };
     useEffect(() => {
     }, [])

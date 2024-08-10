@@ -7,6 +7,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { getInfoFeNo, postInfo } from '../../api/request';
 import html2canvas from 'html2canvas';
 import { AgeToDate, DateToDay, getInfoHeight, getSum } from '../utils';
+import moment from 'moment/moment';
 
 const ChildStyle = styled.div`
   background-color: #fff;
@@ -48,7 +49,7 @@ function ResultAdult() {
 
     useEffect(() => {
         if (dataInfoNavigate?.date) {
-            let url = `height/finByQuery?number_day=${DateToDay(dataInfoNavigate?.date)}&height=${dataInfoNavigate.height}&weight=${dataInfoNavigate.weight}&male=${dataInfoNavigate.male}`
+            let url = `height/finByQuery?number_day=${moment().diff(dataInfoNavigate?.date?.$d, 'days')}&height=${dataInfoNavigate.height}&weight=${dataInfoNavigate.weight}&male=${dataInfoNavigate.male}`
             getInfoFeNo(url).then((res) => {
                 let dataRespon = res?.data?.data
                 setData(res?.data?.data)
@@ -64,6 +65,7 @@ function ResultAdult() {
                     dob: dataInfoNavigate?.date,
                     phone: dataInfoNavigate?.phone,
                     male: dataInfoNavigate?.male,
+                    date_check: getFormattedDate(),
                     weight: dataInfoNavigate?.weight,
                     height: dataInfoNavigate?.height,
                     result: resultHeight + resultWeight + result20Height + result20Weight,
@@ -79,13 +81,7 @@ function ResultAdult() {
             navigate('/adult')
 
         }
-
-
-
-
     }, [])
-    console.log("dataInfoNavigate", dataInfoNavigate);
-    console.log("dataInfoNavigate", data);
 
     return (
         <Row
@@ -107,9 +103,9 @@ function ResultAdult() {
                     <p>Kết quả phân tích vào ngày: {getFormattedDate()}</p>
                     <br />
                     <p>Họ và tên: {dataInfoNavigate?.sponsor}</p>
-                    {/* <p>Ngày tháng năm sinh: {dataInfoNavigate?.date && dataInfoNavigate.date.format('DD/MM/YYYY')}</p> */}
+                    <p>Ngày tháng năm sinh: {dataInfoNavigate?.date && moment(dataInfoNavigate?.date?.$d).format('DD/MM/YYYY')}</p>
                     <p>Giới tính: {dataInfoNavigate?.male == 0 ? "Nam" : "Nữ"}</p>
-                    <p>Độ tuổi: {dataInfoNavigate?.date && AgeToDate(dataInfoNavigate?.date?.format('YYYY-MM-DD'))}</p>
+                    <p>Độ tuổi: {dataInfoNavigate?.date && AgeToDate(moment(dataInfoNavigate?.date?.$d).format('YYYY-MM-DD'))}</p>
                     <p>Chiều cao hiện tại: {dataInfoNavigate?.height}</p>
                     <p>Cân nặng hiện tại: {dataInfoNavigate?.weight}</p>
                     <p>Bệnh lý nếu có: {dataInfoNavigate?.phatho}</p>

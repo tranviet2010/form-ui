@@ -42,36 +42,43 @@ function ResultChild() {
             document.body.removeChild(link);
         }
     };
+    const fetchData = async () => {
+        let url = `nose-femur/finByQuery?age=${dataInfoNavigate?.age}&male=${dataInfoNavigate?.male}&averageNose=${dataInfoNavigate.averageNose}&averageFemur=${dataInfoNavigate.averageFemur}`;
 
-    useEffect(() => {
-        let url = `nose-femur/finByQuery?age=${dataInfoNavigate?.age}&male=${dataInfoNavigate?.male}&averageNose=${dataInfoNavigate.averageNose}&averageFemur=${dataInfoNavigate.averageFemur}`
-        getInfoFeNo(url).then((res) => {
-            let dataRespon = res?.data?.data
-            setData(dataRespon)
+        try {
+            const response = await getInfoFeNo(url);
+            let dataRespon = response?.data?.data;
+            setData(dataRespon);
 
-            let resultCaculNo = `Ngưỡng giới hạn dự đoán xương mũi là: Từ ` + dataRespon[1]?.newStartNose + `(mm)` + ` đến ` + dataRespon[1]?.newEndNose + `(mm) `
-            let resultCaculFe = `Ngưỡng giới hạn dự đoán xương đùi là: Từ ` + dataRespon[0]?.newStartFemur + `(mm)` + ` đến ` + dataRespon[0]?.newEndFemur + `(mm) `
+            let resultCaculNo = `Ngưỡng giới hạn dự đoán xương mũi là: Từ ` + dataRespon[1]?.newStartNose + `(mm)` + ` đến ` + dataRespon[1]?.newEndNose + `(mm) `;
+            let resultCaculFe = `Ngưỡng giới hạn dự đoán xương đùi là: Từ ` + dataRespon[0]?.newStartFemur + `(mm)` + ` đến ` + dataRespon[0]?.newEndFemur + `(mm) `;
 
             const dataResult = {
                 type_result: "C",
                 name: dataInfoNavigate?.name,
                 phone: dataInfoNavigate?.phone,
                 number_child: dataInfoNavigate?.age,
+                date_check:getFormattedDate(),
+                male:dataInfoNavigate?.male,
                 height_femur: dataInfoNavigate?.averageFemur,
                 height_nose: dataInfoNavigate?.averageNose,
                 result: resultCaculNo + resultCaculFe,
                 address: dataInfoNavigate?.address,
                 email: dataInfoNavigate?.email,
                 note: dataInfoNavigate?.note,
-    
-            }
+            };
 
-            postInfo('result', dataResult).then((res) => {})
-        })
+            // Gọi API postInfo sau khi tất cả đã xong
+            await postInfo('result', dataResult);
 
-        
+        } catch (error) {
+            console.error("Error fetching or posting data", error);
+        }
+    };
 
-    }, [])
+    useEffect(() => {
+        fetchData()
+    }, [dataInfoNavigate])
 
 
 
